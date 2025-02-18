@@ -10,20 +10,23 @@ import biswa.dsa.Utill.IterationHelper;
 public class ArrayRotation {
 
 	public static void main(String[] args) {
-		int[] arr = { 1, 2, 3, 4, 5 };
 		int n = 2;
-		
-		usingCoreJava(arr, n);
-	}
 
+		approach1(createArray(), n);
+		approach2(createArray(), n);
+		approach3(createArray(), n);
+	}
+	
 	// TC: O(n^2)
-	public static void usingCoreJava(int[] arr, int n) {
+	// using 2 for loops
+	public static void approach1(int[] arr, int n) {
+		if (n > arr.length)
+			n = n % arr.length;
+		
 		if (n == arr.length) {
 			IterationHelper.iterateIntegerArray(arr, "S");
 			return;
 		}
-		if (n > arr.length)
-			n = n % arr.length;
 
 		for (int i = 0; i < n; i++) {
 			int store = arr[arr.length - 1];
@@ -34,5 +37,49 @@ public class ArrayRotation {
 			arr[0] = store;
 		}
 		IterationHelper.iterateIntegerArray(arr, "S");
+	}
+	
+	// TC: O(3 n) => O(n)
+	// using array reverse
+	public static void approach2(int[] arr, int n) {
+		reverseArray(arr, 0, arr.length-1);
+		reverseArray(arr, 0, n-1);
+		reverseArray(arr, n, arr.length-1);
+		IterationHelper.iterateIntegerArray(arr, "S");
+	}
+
+	// TC: O(n)
+	// using a new array
+	public static void approach3(int[] arr, int n) {
+		int length = arr.length;
+		if (n > length)
+			n = n % length;
+		
+		if (n == arr.length) {
+			IterationHelper.iterateIntegerArray(arr, "S");
+			return;
+		}
+
+		int[] newArr = new int[length];
+		for (int i = 0; i < length; i++) {
+			newArr[i] = arr[length - n];
+			if (--n == 0) {
+				n = length;
+			}
+		}
+		IterationHelper.iterateIntegerArray(newArr, "S");
+	}
+	
+	public static void reverseArray(int[] arr, int start, int end) {
+		if(start > end)
+			return;
+		int store = arr[start];
+		arr[start++] = arr[end];
+		arr[end--] = store;
+		reverseArray(arr, start, end);
+	}
+	
+	public static int[] createArray() {
+		return new int[] {1, 2, 3, 4, 5};
 	}
 }

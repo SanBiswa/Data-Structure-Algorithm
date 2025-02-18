@@ -18,10 +18,15 @@ public class ReverseArray {
 		int arr2[] = { 1, 4, 3, 9, 2, 6, 5 };
 		usingNewArray(arr2);
 		int arr3[] = { 1, 4, 3, 9, 2, 6, 5 };
-		usingRecurssion(arr3, 0, arr3.length);
+		usingRecurssion(arr3, 0, arr3.length-1);
 	}
 
-	// TC: O(log n)
+	/*
+	 * TC: O(n) Why O(n), why not O(log n) because, although the loop runs n/2 times
+	 * but the the internal operations(store, swap, increment, decrement) also takes
+	 * constant amount of time that's why it is directly proportional to the O(n)
+	 * instead of O(log n).
+	 */	
 	public static void usingTwoPointers(int[] arr) {
 		int left = 0, right = arr.length - 1;
 		IterationHelper.iterateIntegerArray(arr, "S");
@@ -51,8 +56,8 @@ public class ReverseArray {
 			return;
 		}
 		int store = arr[left];
-		arr[left] = arr[arr.length-left-1];
-		arr[arr.length-left-1] = store;
+		arr[left] = arr[right];
+		arr[right] = store;
 		usingRecurssion(arr, ++left, --right);
 	}
 }
