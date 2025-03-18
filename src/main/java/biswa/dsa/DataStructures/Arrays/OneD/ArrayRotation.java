@@ -1,5 +1,13 @@
 package biswa.dsa.DataStructures.Arrays.OneD;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.yaml.snakeyaml.util.ArrayUtils;
+
 import biswa.dsa.Utill.IterationHelper;
 
 /*
@@ -15,14 +23,15 @@ public class ArrayRotation {
 		approach1(createArray(), n);
 		approach2(createArray(), n);
 		approach3(createArray(), n);
+		approach4(createArray(), n);
 	}
-	
+
 	// TC: O(n^2)
 	// using 2 for loops
 	public static void approach1(int[] arr, int n) {
 		if (n > arr.length)
 			n = n % arr.length;
-		
+
 		if (n == arr.length) {
 			IterationHelper.iterateIntegerArray(arr, "S");
 			return;
@@ -38,23 +47,14 @@ public class ArrayRotation {
 		}
 		IterationHelper.iterateIntegerArray(arr, "S");
 	}
-	
-	// TC: O(3 n) => O(n)
-	// using array reverse
-	public static void approach2(int[] arr, int n) {
-		reverseArray(arr, 0, arr.length-1);
-		reverseArray(arr, 0, n-1);
-		reverseArray(arr, n, arr.length-1);
-		IterationHelper.iterateIntegerArray(arr, "S");
-	}
 
 	// TC: O(n)
 	// using a new array
-	public static void approach3(int[] arr, int n) {
+	public static void approach2(int[] arr, int n) {
 		int length = arr.length;
 		if (n > length)
 			n = n % length;
-		
+
 		if (n == arr.length) {
 			IterationHelper.iterateIntegerArray(arr, "S");
 			return;
@@ -70,16 +70,33 @@ public class ArrayRotation {
 		IterationHelper.iterateIntegerArray(newArr, "S");
 	}
 	
+	// TC: O(n)
+	// using stream API
+	public static void approach3(int[] arr, int n) {
+		List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+		Collections.rotate(list, n);
+		System.out.println(list);
+	}
+
+	// TC: O(3 n) => O(n)
+	// using array reverse and recursion
+	public static void approach4(int[] arr, int n) {
+		reverseArray(arr, 0, arr.length - 1);
+		reverseArray(arr, 0, n - 1);
+		reverseArray(arr, n, arr.length - 1);
+		IterationHelper.iterateIntegerArray(arr, "S");
+	}
+
 	public static void reverseArray(int[] arr, int start, int end) {
-		if(start > end)
+		if (start > end)
 			return;
 		int store = arr[start];
 		arr[start++] = arr[end];
 		arr[end--] = store;
 		reverseArray(arr, start, end);
 	}
-	
+
 	public static int[] createArray() {
-		return new int[] {1, 2, 3, 4, 5};
+		return new int[] { 1, 2, 3, 4, 5 };
 	}
 }

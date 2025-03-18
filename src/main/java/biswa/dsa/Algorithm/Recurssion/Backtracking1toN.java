@@ -1,17 +1,17 @@
-package biswa.dsa.Recurssion;
+package biswa.dsa.Algorithm.Recurssion;
 
-public class PrintNumbersNTo1 {
+public class Backtracking1toN {
 
 	public static void main(String[] args) {
 		int n = 10;
 		print(n);
 	}
-	
+
 	static void print(int n) {
-		if(n < 1)
+		if (n < 1)
 			return;
+		print(n - 1);
 		System.out.println(n);
-		print(--n);
 	}
 
 }

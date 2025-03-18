@@ -1,4 +1,4 @@
-package biswa.dsa.Recurssion;
+package biswa.dsa.Algorithm.Recurssion;
 
 public class SumOfFirstNNumbers {
 

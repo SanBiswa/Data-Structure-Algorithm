@@ -1,4 +1,4 @@
-package biswa.dsa.Recurssion;
+package biswa.dsa.Algorithm.Recurssion;
 
 /*Write a program to print your name N times without using any ready made loops*/
 public class PrintNameNTimes {

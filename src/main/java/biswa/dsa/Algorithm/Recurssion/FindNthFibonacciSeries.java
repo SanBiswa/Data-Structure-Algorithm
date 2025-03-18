@@ -1,18 +1,25 @@
-package biswa.dsa.Recurssion;
+package biswa.dsa.Algorithm.Recurssion;
 
 public class FindNthFibonacciSeries {
 
 	public static void main(String[] args) {
 
-		int n = 13; // Get the 13th Fibonacci number
-		for (int i = 0; i < n; i++) {
+		int n = 13;
+		getFibonacciSeries(n);
+		getPerticularFibonacciNumber(n);
+	}
+	
+	public static void getFibonacciSeries(int n) {
+		for (int i = 0; i <= n; i++) {
 			System.out.print(fibonacci(i) + " ");
 		}
 		System.out.println();
-		System.out.println(factorial(5));
+	}
+	
+	public static void getPerticularFibonacciNumber(int n) {
+		System.out.println(fibonacci(n));
 	}
 
-	// Recursive method to calculate Fibonacci number
 	public static int fibonacci(int n) {
 		if (n <= 1) {
 			return n;
@@ -24,8 +31,5 @@ public class FindNthFibonacciSeries {
 		return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 	
-	public static int factorial(int n) {
-		if(n==0) return 1;
-		return n * factorial(n-1);
-	}
+
 }
